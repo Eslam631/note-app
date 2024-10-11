@@ -1,0 +1,99 @@
+<section class="signup d-flex align-items-center vh-100">
+  <div class="container boxShadow">
+      <div class="signup-content row">
+          <div class="signup-form col-md-6">
+              <h2 class="form-title fs-2">Sign up</h2>
+              <form class="register-form mt-4" id="register-form" [formGroup]="registerForm" (ngSubmit)="registerSubmit(registerForm)">
+                  <div class="form-group d-flex align-items-center mb-4">
+                      <label for="name">
+                          <span class="fa-solid fa-user"></span>
+                      </label>
+                      <input formControlName="name"  type="text" name="name" id="name" placeholder="Your Name" />
+
+                  </div>
+                  @if (registerForm.get('name')?.errors&&registerForm.get('name')?.touched) {
+                    <div class="alert alert-danger rounded-5">
+                      @if (registerForm.get('name')?.getError('required')) {
+                      <p class="m-0 p-0">name is required</p>}
+                      @if(registerForm.get('name')?.getError('minLength')){
+                      <p  class="m-0 p-0">"Name Should be more than or equal  3 chars"</p>}
+                      @if (registerForm.get('name')?.getError('maxLength')) {
+                      <p  class="m-0 p-0">Name Should be less than or equal  20 chars"</p>}
+                    </div>}
+                  <div class="form-group d-flex align-items-center mb-4">
+                      <label for="email">
+                          <span class="fa-solid fa-envelope"></span>
+                      </label>
+                      <input formControlName="email"  type="email" name="email" id="email" placeholder="Your Email" />
+                  </div>
+                  @if (registerForm.get('email')?.errors&&registerForm.get('email')?.touched) {
+                    <div class="alert alert-danger rounded-5">
+                      @if (registerForm.get('email')?.getError('required')) {
+                      <p class="m-0 p-0">email is required</p>}
+                      @if(registerForm.get('email')?.getError('email')){
+                      <p  class="m-0 p-0">"Enter Valid Email"</p>}
+                    </div>}
+                  <div class="form-group d-flex align-items-center mb-4">
+                      <label for="pass">
+                          <span class="fa-solid fa-lock"></span>
+                      </label>
+                      <input formControlName="password" type="password" name="password" id="password" placeholder="Password" />
+                  </div>
+                  @if (registerForm.get('password')?.errors&&registerForm.get('password')?.touched) {
+                    <div class="alert alert-danger rounded-5">
+                      @if (registerForm.get('password')?.getError('required')) {
+                      <p class="m-0 p-0">password is required</p>}
+                      @if(registerForm.get('password')?.getError('pattern')){
+                      <p  class="m-0 p-0">"password must start with upperCase then from 6 to more any chars  "</p>}
+                    </div>}
+                  <div class="form-group d-flex align-items-center mb-4">
+                      <label for="phone">
+                          <span class="fa-solid fa-phone"></span>
+                      </label>
+                      <input formControlName="phone" type="tel" name="phone" id="phone" placeholder="Phone" />
+                  </div>
+                  @if (registerForm.get('phone')?.errors&&registerForm.get('phone')?.touched) {
+                    <div class="alert alert-danger rounded-5">
+                      @if (registerForm.get('phone')?.getError('required')) {
+                      <p class="m-0 p-0">phone is required</p>}
+                      @if(registerForm.get('phone')?.getError('pattern')){
+                      <p  class="m-0 p-0">"accept only egypt phone numbers  "</p>}
+                    </div>}
+                  <div class="form-group d-flex align-items-center mb-4">
+                      <label for="age">
+                          <span class="fa-solid fa-globe"></span>
+                      </label>
+                      <input formControlName="age" type="number" name="age" id="age" placeholder="Age" />
+                  </div>
+                  @if (registerForm.get('age')?.errors&&registerForm.get('age')?.touched) {
+                    <div class="alert alert-danger rounded-5">
+                      @if (registerForm.get('age')?.getError('required')) {
+                      <p class="m-0 p-0">age is required</p>}
+
+                    </div>}
+                    @if (apiErr) {
+                      <p class="alert alert-danger">{{apiErr}}</p>
+                    }
+                    @else if(msgSusses) {
+                      <p class="alert alert-success">success</p>
+                    }
+                  <div class="d-flex justify-content-center align-items-center flex-column">
+                      <button [disabled]="registerForm.invalid || isloading " class="btn btn-danger">
+                        @if (isloading) {
+
+                          <i class="fa fa-spinner fa-spin"></i>}
+                          @if (!isloading) { <span>Register</span>}
+
+                      </button>
+                      <p class="my-3">Already Have an account?
+                          <a class="text-info" routerLink="/Signin" >Signin</a>
+                      </p>
+                  </div>
+              </form>
+          </div>
+          <div class="signup-image col-md-6 d-flex justify-content-center">
+              <figure><img src="assets/images/signup-image.jpg" alt="sing up image"/></figure>
+          </div>
+      </div>
+  </div>
+</section>
